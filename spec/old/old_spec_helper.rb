@@ -71,18 +71,6 @@ def invalid_credit_card(options={})
   credit_card(invalid_credit_card_attributes(options))
 end
 
-#--- test dummy class definitions
-class ProductDummy < ActiveRecord::Base
-  money :price
-  acts_as_sellable
-  
-  # weird cart serialization workaround
-  def target
-    true
-  end
-  
-end
-
 class UserDummy < ActiveRecord::Base
   acts_as_addressable :billing, :shipping
 end

@@ -21,4 +21,16 @@ CreateMerchantSidekickBillingTables.up
 CreateMerchantSidekickAddressableTables.up
 CreateMerchantSidekickShoppingCartTables.up
 
+#--- test dummy class definitions
+class ProductDummy < ActiveRecord::Base
+  money :price
+  acts_as_sellable
+  
+  # weird cart serialization workaround
+  def target
+    true
+  end
+  
+end
+
 at_exit {ActiveRecord::Base.connection.disconnect!}
