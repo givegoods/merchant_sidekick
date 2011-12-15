@@ -3,11 +3,11 @@ require File.expand_path("../spec_helper", __FILE__)
 CreditCardPayment = MerchantSidekick::Payments::CreditCardPayment
 
 describe CreditCardPayment, "authorization" do
-  
+
   before(:each) do
     @amount = Money.new(100, 'USD')
   end
-  
+
   it "should succeed" do
     auth = CreditCardPayment.authorize(
       @amount,
@@ -18,7 +18,7 @@ describe CreditCardPayment, "authorization" do
     auth.message.should == BogusGateway::SUCCESS_MESSAGE
     auth[:reference].should == BogusGateway::AUTHORIZATION
   end
-  
+
   it "should fail" do
     auth = CreditCardPayment.authorize(
       @amount,
@@ -28,7 +28,7 @@ describe CreditCardPayment, "authorization" do
     auth.action.should == 'authorization'
     auth.message.should == BogusGateway::FAILURE_MESSAGE
   end
-  
+
   it "should error" do
     auth = CreditCardPayment.authorize(
       @amount,
@@ -38,15 +38,15 @@ describe CreditCardPayment, "authorization" do
     auth.action.should == 'authorization'
     auth.message.should == BogusGateway::ERROR_MESSAGE
   end
-  
+
 end
 
 describe CreditCardPayment, "capture" do
-  
+
   before(:each) do
     @amount = Money.new(100, 'USD')
   end
-  
+
   it "should capture successfully" do
     capt = CreditCardPayment.capture(
       @amount,
@@ -56,7 +56,7 @@ describe CreditCardPayment, "capture" do
     capt.action.should == 'capture'
     capt.message.should == BogusGateway::SUCCESS_MESSAGE
   end
-  
+
   it "should fail capture" do
     capt = CreditCardPayment.capture(
       @amount,
@@ -66,7 +66,7 @@ describe CreditCardPayment, "capture" do
     capt.action.should == 'capture'
     capt.message.should == BogusGateway::FAILURE_MESSAGE
   end
-  
+
   it "should error capture" do
     capt = CreditCardPayment.capture(
       @amount,
@@ -76,15 +76,15 @@ describe CreditCardPayment, "capture" do
     capt.action.should == 'capture'
     capt.message.should == BogusGateway::CAPTURE_ERROR_MESSAGE
   end
-  
+
 end
 
 describe CreditCardPayment, "transfer method" do
-  
+
   before(:each) do
     @amount = Money.new(100, 'USD')
   end
-  
+
   it "should sucessfully transfer" do
     capt = CreditCardPayment.transfer(
       @amount,
@@ -114,6 +114,6 @@ describe CreditCardPayment, "transfer method" do
     capt.action.should == 'transfer'
     capt.message.should == BogusGateway::FAILURE_MESSAGE
   end
-  
+
 end
 
